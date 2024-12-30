@@ -226,6 +226,31 @@ console.log(response.name);
 
 - **Card Created Successfully**: Checks that the card is created with the expected name, belongs to the correct list and board, has no attachments, and stores the card ID in collection variables.
 
+#### Move a card
+This request moves a card to a different list within the same Trello board by sending a `PUT` request to the `/1/cards/:id` endpoint. The card ID is provided as a path variable `:id`, and the new list ID, key, and token for authentication as query parameters.
+
+**Post-Response Script**:
+
+```JavaScript
+const response = pm.response.json();
+
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+pm.test("Card Moved", () => {
+    pm.expect(response.idList).to.eql(pm.collectionVariables.get("done_list_id"));
+    pm.expect(response.idBoard).to.eql(pm.collectionVariables.get("board_id"));
+    pm.expect(response.name).to.eql("Sign-up for Trello");
+});
+```
+
+*Explanation*:
+
+- **Status code is 200**: Verifies that the status code returned from the response is 200, indicating a successful request.
+
+- **Card Moved Successfully**: Checks that the card has been moved to the correct list and board, and that the card name is as expected.
+
 
 
 
