@@ -198,4 +198,34 @@ pm.collectionVariables.set("done_list_id", response.id);
 
 - **DONE List Created Successfully**: Checks that the done list is created with the expected name, is not closed, belongs to the correct board, and stores the list ID in collection variables.
 
+#### Create a card
+This request creates a new card within a specified list on a Trello board by sending a `POST` request to the `/1/cards` endpoint. The list ID is provided as a query parameter `idList`, and the key and token for authentication also as query parameters.
+
+**Post-Response Script**:
+
+```JavaScript
+response = pm.response.json();
+
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+pm.test("Card Created", () => {
+    pm.expect(response.name).to.eql("Sign-up for Trello");
+    pm.expect(response.idList).to.eql(pm.collectionVariables.get("to_do_list_id"));
+    pm.expect(response.idBoard).to.eql(pm.collectionVariables.get("board_id"));
+    pm.expect(response.badges.attachmentsByType.trello.card).to.eql(0);
+});
+
+pm.collectionVariables.set("card_id", response.id);
+console.log(response.name);
+```
+
+*Explanation*:
+
+- **Status code is 200**: Verifies that the status code returned from the response is 200, indicating a successful request.
+
+- **Card Created Successfully**: Checks that the card is created with the expected name, belongs to the correct list and board, has no attachments, and stores the card ID in collection variables.
+
+
+
 
