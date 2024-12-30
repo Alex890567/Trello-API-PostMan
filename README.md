@@ -32,3 +32,27 @@ This Postman collection provides a set of requests for interacting with the Trel
 5. [License](#license) 
 6. [Contact Information](#contact-information) 
 7. [Happy Testing](#happy-testing)
+
+## Files
+All the files of the project
+
+### Trello API
+Includes a comprehensive set of requests to interact with the Trello API. These requests are designed to automate the workflow, allowing for seamless creation, management, and retrieval of boards, lists, and cards. The requests include:
+
+- Creating a Board
+
+- Retrieving All Boards
+
+- Retrieving Single Board Details
+
+- Creating a To-Do List
+
+- Creating a DONE List
+
+- Creating a Card
+
+- Moving a Card Between Lists
+
+- Deleting a Board
+
+- Retrieving Deleted Board Details
