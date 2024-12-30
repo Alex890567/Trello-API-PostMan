@@ -251,6 +251,47 @@ pm.test("Card Moved", () => {
 
 - **Card Moved Successfully**: Checks that the card has been moved to the correct list and board, and that the card name is as expected.
 
+#### Delete a board
+This request deletes a specified board by sending a `DELETE` request to the `/1/boards/:id` endpoint. The board ID is provided as a path variable `:id`, and the key and token for authentication as query parameters.
+
+**Prerequest Script**:
+
+```JavaScript
+const existingBoards = pm.collectionVariables.get('existingBoardIds');
+let boardNumber = pm.collectionVariables.get('boardNumber');
+console.log(existingBoards, boardNumber);
+const boardId = existingBoards.pop();
+if (boardNumber > 0) {
+    boardNumber --
+}
+else {
+    boardNumber = 0
+}
+pm.collectionVariables.set('board_id', boardId);
+pm.collectionVariables.set('existingBoardIds', existingBoards);
+pm.collectionVariables.set('boardNumber', boardNumber);
+```
+
+*Explanation*:
+
+- **Retrieve Existing Boards**: Gets the list of existing board IDs from collection variables and logs the current board number.
+
+- **Update Board ID and Number**: Pops the last board ID from the list, decrements the board number if it's greater than zero, and updates the collection variables.
+
+**Post-Response Script**:
+
+```JavaScript
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+```
+
+*Explanation*:
+
+- **Status code is 200**: Verifies that the status code returned from the response is 200, indicating a successful request.
+
+
+
 
 
 
