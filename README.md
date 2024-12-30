@@ -131,3 +131,18 @@ pm.collectionVariables.set('existingBoardIds', existingBoardIds);
 - **Status code is 200**: Verifies that the status code returned from the response is 200, indicating a successful request.
 
 - **Extract existing board IDs**: Parses the response to extract the IDs of all boards and stores them in a collection variable named `existingBoardIds`.
+
+#### Get Single Board
+This request retrieves details of a specific board by sending a `GET` request to the `/1/boards/:id` endpoint. The ID of the targeted board is provided as a path variable `:id`, and the key and token for authentication as query parameters.
+
+**Post-Response Script**:
+
+```JavaScript
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+```
+
+ *Explanation*:
+
+- **Status code is 200**: Verifies that the status code returned from the response is 200, indicating a successful request.
