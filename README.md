@@ -56,3 +56,56 @@ Includes a comprehensive set of requests to interact with the Trello API. These 
 - Deleting a Board
 
 - Retrieving Deleted Board Details
+
+#### Create a Board
+This request creates a new board in Trello by sending a POST request to the /1/boards/ endpoint. It includes the necessary query parameters to specify the board name, API key, and access token.
+
+**Prerequest Script**:
+
+```JavaScript
+let boardNumber = pm.collectionVariables.get('boardNumber');
+
+if (isNaN(boardNumber)) {
+    boardNumber = 0
+};
+
+boardNumber ++
+pm.collectionVariables.set('boardNumber', boardNumber);
+```
+
+*Explanation*:
+
+- **Increment Board Number**: Retrieves the current board number from collection variables and checks if it's a valid number. If it is not (`NaN`), it initializes the board number to 0. Then, it increments the board number by one and updates the collection variable.
+
+**Post-Response Script**:
+
+```JavaScript
+let response;
+
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+pm.test("Board is Created Successfully", () => {
+    response = pm.response.json();
+    pm.expect(response.name).to.eql('postMan_Board' +' '+ pm.collectionVariables.get('boardNumber'));
+    pm.expect(response.closed).to.be.false;
+    pm.collectionVariables.set("board_id", response.id);
+});
+pm.test("Board is private", () => {
+    pm.expect(response.prefs.permissionLevel).to.eql("private");
+});
+pm.test("Calendar is disabled", () => {
+    pm.expect(response.prefs.switcherViews[2].enabled).to.be.false;
+});
+```
+
+*Explanation*:
+
+- **Status code is 200**: Verifies that the status code returned from the response is 200, indicating a successful request.
+
+- **Board is Created Successfully**: Checks that the board is created with the expected name, is not closed, and stores the board ID in collection variables.
+
+- **Board is private**: Ensures that the board's permission level is set to `private`.
+
+- **Calendar is disabled**: Confirms that the calendar view is disabled for the created board.
