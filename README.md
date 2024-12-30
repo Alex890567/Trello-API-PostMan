@@ -58,7 +58,7 @@ Includes a comprehensive set of requests to interact with the Trello API. These 
 - Retrieving Deleted Board Details
 
 #### Create a Board
-This request creates a new board in Trello by sending a POST request to the /1/boards/ endpoint. It includes the necessary query parameters to specify the board name, API key, and access token.
+This request creates a new board in Trello by sending a `POST` request to the `/1/boards/` endpoint. It includes the necessary query parameters to specify the board name, API key, and access token.
 
 **Prerequest Script**:
 
@@ -109,3 +109,25 @@ pm.test("Calendar is disabled", () => {
 - **Board is private**: Ensures that the board's permission level is set to `private`.
 
 - **Calendar is disabled**: Confirms that the calendar view is disabled for the created board.
+
+#### Get All Boards
+This request retrieves a list of all boards for the authenticated user by sending a `GET` request to the `/1/members/me/boards` endpoint, and verifies that the correct status code is returned.
+
+**Post-Response Script**:
+
+```JavaScript
+const response = pm.response.json();
+
+pm.test("Status code is 200", () => {
+    pm.response.to.have.status(200);
+});
+
+existingBoardIds = response.map(board => board.id);
+pm.collectionVariables.set('existingBoardIds', existingBoardIds);
+```
+
+*Explanation*:
+
+- **Status code is 200**: Verifies that the status code returned from the response is 200, indicating a successful request.
+
+- **Extract existing board IDs**: Parses the response to extract the IDs of all boards and stores them in a collection variable named `existingBoardIds`.
