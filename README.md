@@ -146,3 +146,30 @@ pm.test("Status code is 200", function () {
  *Explanation*:
 
 - **Status code is 200**: Verifies that the status code returned from the response is 200, indicating a successful request.
+
+#### Create To Do List
+This request creates a new to-do list within a specified board by sending a `POST` request to the `/1/boards/:id/lists` endpoint. The board ID is provided as a path variable `:id`, and the key and token for authentication as query parameters.
+
+**Post-Response Script**:
+
+```JavaScript
+response = pm.response.json();
+
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+pm.test("To do list created", () => {
+    pm.expect(response.name).to.eql("TODO");
+    pm.expect(response.closed).to.be.false;
+    pm.expect(response.idBoard).to.eql(pm.collectionVariables.get("board_id"));
+})
+pm.collectionVariables.set("to_do_list_id", response.id);
+```
+
+*Explanation*:
+
+- **Status code is 200**: Verifies that the status code returned from the response is 200, indicating a successful request.
+
+- **To-do List Created Successfully**: Checks that the to-do list is created with the expected name, is not closed, belongs to the correct board, and stores the list ID in collection variables.
+
+
