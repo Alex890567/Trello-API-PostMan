@@ -290,6 +290,34 @@ pm.test("Status code is 200", function () {
 
 - **Status code is 200**: Verifies that the status code returned from the response is 200, indicating a successful request.
 
+## Running the Collection
+Contains instructions on how to run the Collection.
+
+### Prerequisites
+Before running the Postman collection, ensure you have the following:
+
+1. **Postman Installed**: Download and install Postman from the official website if you haven't already.
+
+2. **Postman Collection**: Download the Postman collection from the provided GitHub repository.
+
+3. **Authorization Token**: Ensure you have a valid authorization token, as it is required for several requests in the collection. To create one, visit Trello API documentation for instructions: [https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/](https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/)
+
+### Execute the Collection
+Follow these steps to run the Postman collection:
+
+1. **Import the Collection**:
+
+    - Open Postman and click on the "Import" button.
+
+    - Select the downloaded collection to import it into Postman.
+
+2. **Use your Token and API Key**: Click on the "edit" button of the collection, go to the variables and change the current value of the `accessToken` and `api_key` variables with your token and api key.  
+
+3. **Run the Collection**:
+
+    - Go to the Collections tab, select the imported collection, and click on the "Run" button.
+
+
 
 
 
