@@ -317,6 +317,14 @@ Follow these steps to run the Postman collection:
 
     - Go to the Collections tab, select the imported collection, and click on the "Run" button.
 
+## License
+All rights reserved. See the [LICENSE](./LICENSE) file for more details.
+
+## Contact Information
+For any questions or feedback, feel free to reach out to me at alexparlaloglou@gmail.com
+
+## Happy Testing!
+
 
 
 
